@@ -4,61 +4,61 @@ make := `which make`
 
 build:
     mkdir -p build
-    {{ just }} cosmic-applets/build-release
-    {{ just }} cosmic-applibrary/build-release
-    {{ just }} cosmic-bg/build-release
+    cd cosmic-applets && {{ just }} build-release
+    cd cosmic-applibrary && {{ just }} build-release
+    cd cosmic-bg && {{ just }} build-release
     {{ make }} -C cosmic-comp all
-    {{ just }} cosmic-edit/build-release
-    {{ just }} cosmic-files/build-release
-    {{ just }} cosmic-greeter/build-release
-    {{ just }} cosmic-idle/build-release
-    {{ just }} cosmic-initial-setup/build-release
-    {{ just }} cosmic-launcher/build-release
-    {{ just }} cosmic-monitor/build-release
-    {{ just }} cosmic-notifications/build-release
-    {{ just }} cosmic-osd/build-release
-    {{ just }} cosmic-panel/build-release
-    {{ just }} cosmic-player/build-release
-    {{ just }} cosmic-randr/build-release
-    {{ just }} cosmic-screenshot/build-release
-    {{ just }} cosmic-settings/build-release
+    cd cosmic-edit && {{ just }} build-release
+    cd cosmic-files && {{ just }} build-release
+    cd cosmic-greeter && {{ just }} build-release
+    cd cosmic-idle && {{ just }} build-release
+    cd cosmic-initial-setup && {{ just }} build-release
+    cd cosmic-launcher && {{ just }} build-release
+    cd cosmic-monitor && {{ just }} build-release
+    cd cosmic-notifications && {{ just }} build-release
+    cd cosmic-osd && {{ just }} build-release
+    cd cosmic-panel && {{ just }} build-release
+    cd cosmic-player && {{ just }} build-release
+    cd cosmic-randr && {{ just }} build-release
+    cd cosmic-screenshot && {{ just }} build-release
+    cd cosmic-settings && {{ just }} build-release
     {{ make }} -C cosmic-settings-daemon all
-    {{ just }} cosmic-session/build-release
-    {{ just }} cosmic-store/build-release
-    {{ just }} cosmic-term/build-release
+    cd cosmic-session && {{ just }} build-release
+    cd cosmic-store && {{ just }} build-release
+    cd cosmic-term && {{ just }} build-release
     {{ make }} -C cosmic-wallpapers all
     {{ make }} -C cosmic-workspaces-epoch all
-    {{ just }} pop-launcher/build-release
-    {{ make }} -C xdg-desktop-portal-cosmic all
+    cd pop-launcher && {{ just }} build-release
+    cd xdg-desktop-portal-cosmic && {{ just }} build
 
 install rootdir="" prefix="/usr/local": build
-    {{ just }} rootdir={{rootdir}} prefix={{prefix}} cosmic-applets/install
-    {{ just }} rootdir={{rootdir}} prefix={{prefix}} cosmic-applibrary/install
-    {{ just }} rootdir={{rootdir}} prefix={{prefix}} cosmic-bg/install
+    cd cosmic-applets && {{ just }} rootdir={{rootdir}} prefix={{prefix}} install
+    cd cosmic-applibrary && {{ just }} rootdir={{rootdir}} prefix={{prefix}} install
+    cd cosmic-bg && {{ just }} rootdir={{rootdir}} prefix={{prefix}} install
     {{ make }} -C cosmic-comp install DESTDIR={{rootdir}} prefix={{prefix}}
-    {{ just }} rootdir={{rootdir}} prefix={{prefix}} cosmic-edit/install
-    {{ just }} rootdir={{rootdir}} prefix={{prefix}} cosmic-files/install
-    {{ just }} rootdir={{rootdir}} prefix={{prefix}} cosmic-greeter/install
-    {{ just }} rootdir={{rootdir}} prefix={{prefix}} cosmic-icons/install
-    {{ just }} rootdir={{rootdir}} prefix={{prefix}} cosmic-idle/install
-    {{ just }} rootdir={{rootdir}} prefix={{prefix}} cosmic-initial-setup/install
-    {{ just }} rootdir={{rootdir}} prefix={{prefix}} cosmic-launcher/install
-    {{ just }} rootdir={{rootdir}} prefix={{prefix}} cosmic-monitor/install
-    {{ just }} rootdir={{rootdir}} prefix={{prefix}} cosmic-notifications/install
-    {{ just }} rootdir={{rootdir}} prefix={{prefix}} cosmic-osd/install
-    {{ just }} rootdir={{rootdir}} prefix={{prefix}} cosmic-panel/install
-    {{ just }} rootdir={{rootdir}} prefix={{prefix}} cosmic-player/install
-    {{ just }} rootdir={{rootdir}} prefix={{prefix}} cosmic-randr/install
-    {{ just }} rootdir={{rootdir}} prefix={{prefix}} cosmic-screenshot/install
-    {{ just }} rootdir={{rootdir}} prefix={{prefix}} cosmic-settings/install
+    cd cosmic-edit && {{ just }} rootdir={{rootdir}} prefix={{prefix}} install
+    cd cosmic-files && {{ just }} rootdir={{rootdir}} prefix={{prefix}} install
+    cd cosmic-greeter && {{ just }} rootdir={{rootdir}} prefix={{prefix}} install
+    cd cosmic-icons && {{ just }} rootdir={{rootdir}} prefix={{prefix}} install
+    cd cosmic-idle && {{ just }} rootdir={{rootdir}} prefix={{prefix}} install
+    cd cosmic-initial-setup && {{ just }} rootdir={{rootdir}} prefix={{prefix}} install
+    cd cosmic-launcher && {{ just }} rootdir={{rootdir}} prefix={{prefix}} install
+    cd cosmic-monitor && {{ just }} rootdir={{rootdir}} prefix={{prefix}} install
+    cd cosmic-notifications && {{ just }} rootdir={{rootdir}} prefix={{prefix}} install
+    cd cosmic-osd && {{ just }} rootdir={{rootdir}} prefix={{prefix}} install
+    cd cosmic-panel && {{ just }} rootdir={{rootdir}} prefix={{prefix}} install
+    cd cosmic-player && {{ just }} rootdir={{rootdir}} prefix={{prefix}} install
+    cd cosmic-randr && {{ just }} rootdir={{rootdir}} prefix={{prefix}} install
+    cd cosmic-screenshot && {{ just }} rootdir={{rootdir}} prefix={{prefix}} install
+    cd cosmic-settings && {{ just }} rootdir={{rootdir}} prefix={{prefix}} install
     {{ make }} -C cosmic-settings-daemon install DESTDIR={{rootdir}} prefix={{prefix}}
-    {{ just }} rootdir={{rootdir}} prefix={{prefix}} cosmic-session/install
-    {{ just }} rootdir={{rootdir}} prefix={{prefix}} cosmic-store/install
-    {{ just }} rootdir={{rootdir}} prefix={{prefix}} cosmic-term/install
+    cd cosmic-session && {{ just }} rootdir={{rootdir}} prefix={{prefix}} install
+    cd cosmic-store && {{ just }} rootdir={{rootdir}} prefix={{prefix}} install
+    cd cosmic-term && {{ just }} rootdir={{rootdir}} prefix={{prefix}} install
     {{ make }} -C cosmic-wallpapers install DESTDIR={{rootdir}} prefix={{prefix}}
     {{ make }} -C cosmic-workspaces-epoch install DESTDIR={{rootdir}} prefix={{prefix}}
-    {{ just }} rootdir={{rootdir}} pop-launcher/install
-    {{ make }} -C xdg-desktop-portal-cosmic install DESTDIR={{rootdir}} prefix={{prefix}}
+    cd pop-launcher && {{ just }} rootdir={{rootdir}} install
+    cd xdg-desktop-portal-cosmic && {{ just }} rootdir={{rootdir}} prefix={{prefix}} install
 
 _mkdir dir:
    mkdir -p dir
